@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+<div class="notes-bar">
+    <a class="btn btn-success" href="/add_note">Добавить записку</a>
+    <a class="btn btn-primary" href="/search_note">Поиск записки</a>
+</div>
+<section>
+    <div class="container">
+        <div class="notes">
+            {% for note in notes %}
+            <div class="note" style="{% if note.is_important %} background-color: #62fd60; {% endif %}"
+                 onclick="location.href='/edit_note/{{ note.id }}';">
+                <a href="/del_note/{{ note.id }}" class="note-delete" title="Удалить запись">❌</a>
+                <h3 class="note-title">{{ note.title }}</h3>
+                <p class="pre-note">
+                    {{ note.body }}
+                </p>
+                <div class="attachement">
+                    {% if note.images is not none %}
+                    <p>📎 1 вложение</p>
+                    {% else %}
+                    <p>📎 0 вложений</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1 class="text-center">Редактировать запись</h1>
+<form action="" method="post" class="middle-form" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token() }}
+    <p>
+        {{ form.title(class="form-control", placeholder="Заголовок") }}
+        {% for error in form.title.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.body(class="form-control", placeholder="Текст записки", style="height:330px;") }}
+        {% for error in form.body.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    {% if form.current_image != "" %}
+    <p>
+        <h3 class="text-center">Текущее изображение</h3>
+        <img src="{{ form.current_image }}" alt="">
+        {% for error in form.body.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    {% else %}
+    <p>У этой записи нет приложений</p>
+    {% endif %}
+    <p>
+        {{ form.place(class="form-control", placeholder="Адрес места") }}
+        {% for error in form.place.error %}
+    <p class="alert alert-danger" role="alert">
+        {{ role }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>{{ form.image.label }}<br>{{ form.image() }}</p>
+    <p>{{ form.is_important() }} {{ form.is_important.label }}</p>
+    <p>{{ form.submit(type="submit", clas="btn btn-primary") }}</p>
+    {{ message }}
+</form>
+
+{% endblock %}

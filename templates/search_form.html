@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+<div class="search-bar">
+    <form action="" method="post" class="middle-form">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token() }}
+        <p>
+            {{ form.search(class="form-control", placeholder="Поиск по записям") }}
+            {% for error in form.search.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+        </p>
+        <p>{{ form.submit(type="submit", clas="btn btn-primary", style="float:right;") }}</p>
+    </form>
+</div>
+<section>
+    <div class="container">
+        <div class="notes">
+            {% for note in notes %}
+            <div class="note" style="{% if note.is_important %} background-color: #62fd60; {% endif %}"
+                 onclick="location.href='/edit_note/{{ note.id }}';">
+                <a href="/del_note/{{ note.id }}" class="note-delete" title="Удалить запись">❌</a>
+                <h3 class="note-title">{{ note.title }}</h3>
+                <p class="pre-note">
+                    {{ note.body }}
+                </p>
+                <div class="attachement">
+                    {% if note.images is not none %}
+                    <p>📎 1 вложение</p>
+                    {% else %}
+                    <p>📎 0 вложений</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="not-found-notes">{{ message }}</p>
+    </div>
+</section>
+
+{% endblock %}

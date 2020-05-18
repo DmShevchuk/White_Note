@@ -1,0 +1,3 @@
+# Your tokens here
+GEOCODER_TOKEN = ''
+YANDEX_TRANSLATE_TOKEN = ''

@@ -1,0 +1,47 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+<h1 class="text-center">Переводчик</h1>
+<form action="" method="post" class="middle-form">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token() }}
+    <p>
+        {{ form.first_language.label }}
+        {{ form.first_language }}
+        {% for error in form.first_language.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.text_for_translate(class="form-control", style="height:130px;", placeholder="Введите текст") }}
+        {% for error in form.text_for_translate.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.second_language.label }}
+        {{ form.second_language }}
+        {% for error in form.second_language.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    </p>
+    <p>
+        {{ form.translated_text(class="form-control", style="height:130px;", placeholder="Текст появится здесь") }}
+        {% for error in form.translated_text.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", clas="btn btn-primary", style="float:right;") }}</p>
+</form>
+{{ message }}
+{% endblock %}
